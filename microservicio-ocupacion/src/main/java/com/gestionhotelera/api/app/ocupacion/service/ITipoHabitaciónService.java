@@ -9,6 +9,7 @@ import java.util.List;
 public interface ITipoHabitaciónService {
     public List<TipoHabitacion> list();
     public ImagenesHabitacion find(Long id_habitacion, Long id_imagen);
-    public habitaciones find(Long id);
-    public habitaciones save(habitaciones habitaciones);
+    public TipoHabitacion find(Long id);
+    public habitaciones findHabitaciones(Long id);
+    public TipoHabitacion save(TipoHabitacion tipoHabitacion);
 }

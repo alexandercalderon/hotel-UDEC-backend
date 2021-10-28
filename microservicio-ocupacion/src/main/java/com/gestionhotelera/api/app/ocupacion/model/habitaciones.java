@@ -1,11 +1,9 @@
 package com.gestionhotelera.api.app.ocupacion.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity

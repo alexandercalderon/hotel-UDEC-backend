@@ -11,9 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -27,23 +25,22 @@ public class TipoHabitacionController {
         return ResponseEntity.ok().body(service.list());
     }
 
-    @PostMapping("/agregar_imagen/{id}")
-    public ResponseEntity<?> save(@PathVariable Long id, @RequestParam MultipartFile file) throws IOException{
-        habitaciones habitaciones = service.find(id);
-        ImagenesHabitacion imagen = new ImagenesHabitacion();
-        imagen.setImagen(file.getBytes());
-        imagen.setHabitaciones(habitaciones);
-        habitaciones.addImagen(imagen);
-        return  ResponseEntity.status(HttpStatus.CREATED).body(service.save(habitaciones));
-
-    }
-
     @GetMapping("/show/{habitacion}/{imagen}")
     public ResponseEntity<?> find(@PathVariable Long habitacion, @PathVariable Long imagen){
         ImagenesHabitacion imagenen = service.find(habitacion, imagen);
+        if(imagenen == null) return ResponseEntity.noContent().build();
         if(imagenen.getImagen() == null) return ResponseEntity.noContent().build();
         Resource img = new ByteArrayResource(imagenen.getImagen());
         return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(img);
     }
 
+    @PutMapping("/update/{estado}/{idHabitacion}/{idTipoHabitacion}")
+    public ResponseEntity<?> save(@PathVariable Character estado, @PathVariable Long idHabitacion, @PathVariable Long idTipoHabitacion){
+        TipoHabitacion tipoHabitacion = service.find(idTipoHabitacion);
+        if(tipoHabitacion == null) return ResponseEntity.notFound().build();
+        habitaciones habitaciones = service.findHabitaciones(idHabitacion);
+        if(habitaciones == null) return ResponseEntity.notFound().build();
+        habitaciones.setEstado(estado);
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(tipoHabitacion));
+    }
 }
