@@ -43,4 +43,9 @@ public class TipoHabitacionController {
         habitaciones.setEstado(estado);
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(tipoHabitacion));
     }
+
+    @GetMapping("/filtrar/{estado}")
+    public ResponseEntity<?> filtrar(@PathVariable Character estado){
+        return ResponseEntity.ok().body(service.filtrado(estado));
+    }
 }

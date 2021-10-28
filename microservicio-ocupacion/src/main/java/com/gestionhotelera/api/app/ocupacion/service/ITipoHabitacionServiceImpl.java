@@ -31,7 +31,7 @@ public class ITipoHabitacionServiceImpl implements ITipoHabitaciónService{
     }
 
     @Query
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public TipoHabitacion find(Long id){
         return repo.findById(id).orElse(null);
@@ -43,8 +43,15 @@ public class ITipoHabitacionServiceImpl implements ITipoHabitaciónService{
     }
 
     @Override
+    @Transactional
     public TipoHabitacion save(TipoHabitacion tipoHabitacion) {
         return repo.save(tipoHabitacion);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<habitaciones> filtrado(Character estado) {
+        return repo.filtrar(estado);
     }
 
 
