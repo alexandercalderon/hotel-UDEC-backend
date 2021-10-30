@@ -1,6 +1,5 @@
 package com.gestionhotelera.api.app.checkin.microservicecheckin.service;
 
-import com.gestionhotelera.api.app.checkin.microservicecheckin.dto.CheckInDTO;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.model.CheckIn;
 
 import java.util.List;

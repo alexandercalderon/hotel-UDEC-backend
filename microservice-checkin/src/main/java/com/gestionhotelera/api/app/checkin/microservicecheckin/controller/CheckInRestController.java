@@ -1,5 +1,6 @@
 package com.gestionhotelera.api.app.checkin.microservicecheckin.controller;
 
+import com.gestionhotelera.api.app.checkin.microservicecheckin.dto.UsuarioDTO;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.model.CheckIn;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.model.Usuario;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.service.ICheckInService;
@@ -62,19 +63,20 @@ public class CheckInRestController {
         return new ResponseEntity<>(checkIn, HttpStatus.OK);
     }
 
-    @GetMapping("/get/cedula/{cedula}")
-    public ResponseEntity<?> viewCheckInByCedula(@PathVariable String cedula){
+    @GetMapping("/get/cedula")
+    public ResponseEntity<?> viewCheckInByCedula(@RequestBody UsuarioDTO usuarioDTO){
         CheckIn checkIn = null;
         Map<String, Object> response = new HashMap<>();
         try{
-            checkIn = checkInService.getCheckByCedula(cedula);
+            checkIn = checkInService.getCheckByCedula(usuarioDTO.getCedula());
         }catch (DataAccessException e){
             response.put("mensaje", "Error al realizar la consulta en la base de datos");
             response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         if(checkIn == null){
-            response.put("mensaje","El Check-in asociada a esta cedula " + cedula + ", no existe");
+            response.put("mensaje","El Check-in asociada a esta cedula " + usuarioDTO.getCedula()
+                    + ", no existe");
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 
         }

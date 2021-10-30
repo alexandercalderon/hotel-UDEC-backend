@@ -1,6 +1,5 @@
 package com.gestionhotelera.api.app.checkin.microservicecheckin.service.implementation;
 
-import com.gestionhotelera.api.app.checkin.microservicecheckin.dto.CheckInDTO;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.model.CheckIn;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.repository.CheckInRepository;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.service.ICheckInService;

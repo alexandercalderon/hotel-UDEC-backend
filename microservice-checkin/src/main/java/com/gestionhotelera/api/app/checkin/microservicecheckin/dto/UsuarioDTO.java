@@ -15,16 +15,8 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CheckInDTO {
+public class UsuarioDTO {
 
-    private Long id;
-
-    private Integer numeroDias;
-
-    private LocalDate fechaIngreso;
-
-    private LocalDate fechaSalida;
-
-    private Long idUsuario;
+    private String cedula;
 
 }

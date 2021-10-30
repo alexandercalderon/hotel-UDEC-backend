@@ -1,6 +1,5 @@
 package com.gestionhotelera.api.app.checkin.microservicecheckin.repository;
 
-import com.gestionhotelera.api.app.checkin.microservicecheckin.dto.CheckInDTO;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.model.CheckIn;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
