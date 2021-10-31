@@ -50,7 +50,7 @@ public class ITipoHabitacionServiceImpl implements ITipoHabitaciónService{
 
     @Override
     @Transactional(readOnly = true)
-    public List<habitaciones> filtrado(Character estado) {
+    public List<TipoHabitacion> filtrado(Character estado) {
         return repo.filtrar(estado);
     }
 

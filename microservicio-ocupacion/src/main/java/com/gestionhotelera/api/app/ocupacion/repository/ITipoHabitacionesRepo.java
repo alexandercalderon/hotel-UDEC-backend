@@ -18,6 +18,6 @@ public interface ITipoHabitacionesRepo extends JpaRepository<TipoHabitacion, Lon
     @Query("select  h from habitaciones  h join fetch  h.tipoHabitacion th where h.idHabitacion=?1")
     public Optional<habitaciones> findHabitaciones(Long idHanitacion);
 
-    @Query("select h from habitaciones h  where h.estado=?1")
-    public List<habitaciones> filtrar(Character estado);
+    @Query("select th from TipoHabitacion th join fetch th.habitaciones h where h.estado=?1")
+    public List<TipoHabitacion> filtrar(Character estado);
 }
