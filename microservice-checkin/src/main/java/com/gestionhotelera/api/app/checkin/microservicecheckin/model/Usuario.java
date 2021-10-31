@@ -1,6 +1,5 @@
 package com.gestionhotelera.api.app.checkin.microservicecheckin.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,13 +34,13 @@ public class Usuario {
     private String nombre;
 
     @NotBlank
+    private String apellido;
+
+    @NotBlank
     private String direccion;
 
     @NotBlank
     private String ciudad;
-
-    @NotBlank
-    private String pais;
 
     @NotBlank
     @Email

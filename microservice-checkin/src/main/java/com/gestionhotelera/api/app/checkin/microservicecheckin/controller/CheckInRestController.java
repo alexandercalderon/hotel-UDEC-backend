@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/check-in")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CheckInRestController {
 
     @Autowired
@@ -63,7 +64,7 @@ public class CheckInRestController {
         return new ResponseEntity<>(checkIn, HttpStatus.OK);
     }
 
-    @GetMapping("/get/cedula")
+    @PostMapping("/get/cedula")
     public ResponseEntity<?> viewCheckInByCedula(@RequestBody UsuarioDTO usuarioDTO){
         CheckIn checkIn = null;
         Map<String, Object> response = new HashMap<>();

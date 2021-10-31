@@ -26,8 +26,6 @@ public class Habitacion {
 
     private Integer numeroHabitacion;
 
-    private Character estado;
-
     private Double tarifa;
 
 }
