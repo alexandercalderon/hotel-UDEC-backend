@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -47,6 +48,8 @@ public class TipoHabitacionController {
 
     @GetMapping("/filtrar/{estado}")
     public ResponseEntity<?> filtrar(@PathVariable Character estado){
-        return ResponseEntity.ok().body(service.filtrado(estado));
+        List<TipoHabitacion> filtrado = service.filtrado(estado);
+        filtrado = filtrado.stream().distinct().collect(Collectors.toList());
+        return ResponseEntity.ok().body(filtrado);
     }
 }
