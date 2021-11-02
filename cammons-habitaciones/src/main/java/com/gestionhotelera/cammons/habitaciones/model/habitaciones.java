@@ -1,4 +1,4 @@
-package com.gestionhotelera.api.app.ocupacion.model;
+package com.gestionhotelera.cammons.habitaciones.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

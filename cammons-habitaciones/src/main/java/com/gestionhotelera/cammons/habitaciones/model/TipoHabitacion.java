@@ -1,4 +1,4 @@
-package com.gestionhotelera.api.app.ocupacion.model;
+package com.gestionhotelera.cammons.habitaciones.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -48,7 +48,7 @@ public class TipoHabitacion {
         this.precioHabitacion = precioHabitacion;
     }
 
-    public void setHabitaciones(List<com.gestionhotelera.api.app.ocupacion.model.habitaciones> habitaciones) {
+    public void setHabitaciones(List<com.gestionhotelera.cammons.habitaciones.model.habitaciones> habitaciones) {
         this.habitaciones = habitaciones;
     }
 
@@ -68,7 +68,7 @@ public class TipoHabitacion {
         return precioHabitacion;
     }
 
-    public List<com.gestionhotelera.api.app.ocupacion.model.habitaciones> getHabitaciones() {
+    public List<com.gestionhotelera.cammons.habitaciones.model.habitaciones> getHabitaciones() {
         return habitaciones;
     }
 }

@@ -1,8 +1,8 @@
 package com.gestionhotelera.api.app.ocupacion.controller;
 
-import com.gestionhotelera.api.app.ocupacion.model.ImagenesHabitacion;
-import com.gestionhotelera.api.app.ocupacion.model.TipoHabitacion;
-import com.gestionhotelera.api.app.ocupacion.model.habitaciones;
+import com.gestionhotelera.cammons.habitaciones.model.ImagenesHabitacion;
+import com.gestionhotelera.cammons.habitaciones.model.TipoHabitacion;
+import com.gestionhotelera.cammons.habitaciones.model.habitaciones;
 import com.gestionhotelera.api.app.ocupacion.service.ITipoHabitaciónService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;

@@ -1,4 +1,4 @@
-package com.gestionhotelera.api.app.ocupacion.model;
+package com.gestionhotelera.cammons.habitaciones.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -33,7 +33,7 @@ public class ImagenesHabitacion implements Serializable {
         this.id = id;
     }
 
-    public void setHabitaciones(com.gestionhotelera.api.app.ocupacion.model.habitaciones habitaciones) {
+    public void setHabitaciones(com.gestionhotelera.cammons.habitaciones.model.habitaciones habitaciones) {
         this.habitaciones = habitaciones;
     }
 
@@ -49,7 +49,7 @@ public class ImagenesHabitacion implements Serializable {
         return id;
     }
 
-    public com.gestionhotelera.api.app.ocupacion.model.habitaciones getHabitaciones() {
+    public com.gestionhotelera.cammons.habitaciones.model.habitaciones getHabitaciones() {
         return habitaciones;
     }
 }

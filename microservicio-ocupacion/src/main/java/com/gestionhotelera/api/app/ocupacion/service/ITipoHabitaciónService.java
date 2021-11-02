@@ -1,8 +1,8 @@
 package com.gestionhotelera.api.app.ocupacion.service;
 
-import com.gestionhotelera.api.app.ocupacion.model.ImagenesHabitacion;
-import com.gestionhotelera.api.app.ocupacion.model.TipoHabitacion;
-import com.gestionhotelera.api.app.ocupacion.model.habitaciones;
+import com.gestionhotelera.cammons.habitaciones.model.ImagenesHabitacion;
+import com.gestionhotelera.cammons.habitaciones.model.TipoHabitacion;
+import com.gestionhotelera.cammons.habitaciones.model.habitaciones;
 
 import java.util.List;
 
