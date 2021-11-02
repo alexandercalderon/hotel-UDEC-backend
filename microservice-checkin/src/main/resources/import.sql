@@ -12,3 +12,6 @@ INSERT INTO usuarios_habitaciones (usuario_id, habitacion_id) VALUES (1,2);
 INSERT INTO usuarios_habitaciones (usuario_id, habitacion_id) VALUES (1,3);
 INSERT INTO usuarios_habitaciones (usuario_id, habitacion_id) VALUES (2,4);
 INSERT INTO usuarios_habitaciones (usuario_id, habitacion_id) VALUES (2,5);
+
+INSERT INTO check_in (fecha_ingreso, fecha_salida, numero_dias) VALUES ('2020-10-5', '2020-10-10', 5);
+INSERT INTO check_in (fecha_ingreso, fecha_salida, numero_dias) VALUES ('2019-08-10', '2019-08-20', 10);
