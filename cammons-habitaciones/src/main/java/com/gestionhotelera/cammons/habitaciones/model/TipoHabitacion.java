@@ -30,7 +30,7 @@ public class TipoHabitacion {
 
     @JsonIgnoreProperties(value = "tipoHabitacion", allowSetters = true)
     @OneToMany(mappedBy = "tipoHabitacion", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<habitaciones> habitaciones;
+    private List<Habitaciones> habitaciones;
 
     public void setIdTipoHabitacion(Long idTipoHabitacion) {
         this.idTipoHabitacion = idTipoHabitacion;
@@ -48,7 +48,7 @@ public class TipoHabitacion {
         this.precioHabitacion = precioHabitacion;
     }
 
-    public void setHabitaciones(List<com.gestionhotelera.cammons.habitaciones.model.habitaciones> habitaciones) {
+    public void setHabitaciones(List<Habitaciones> habitaciones) {
         this.habitaciones = habitaciones;
     }
 
@@ -68,7 +68,7 @@ public class TipoHabitacion {
         return precioHabitacion;
     }
 
-    public List<com.gestionhotelera.cammons.habitaciones.model.habitaciones> getHabitaciones() {
+    public List<Habitaciones> getHabitaciones() {
         return habitaciones;
     }
 }

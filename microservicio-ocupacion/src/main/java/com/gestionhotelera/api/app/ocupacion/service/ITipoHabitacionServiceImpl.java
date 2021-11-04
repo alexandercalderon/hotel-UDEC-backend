@@ -2,7 +2,7 @@ package com.gestionhotelera.api.app.ocupacion.service;
 
 import com.gestionhotelera.cammons.habitaciones.model.ImagenesHabitacion;
 import com.gestionhotelera.cammons.habitaciones.model.TipoHabitacion;
-import com.gestionhotelera.cammons.habitaciones.model.habitaciones;
+import com.gestionhotelera.cammons.habitaciones.model.Habitaciones;
 import com.gestionhotelera.api.app.ocupacion.repository.ITipoHabitacionesRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
@@ -38,7 +38,7 @@ public class ITipoHabitacionServiceImpl implements ITipoHabitaciónService{
     }
 
     @Override
-    public habitaciones findHabitaciones(Long id) {
+    public Habitaciones findHabitaciones(Long id) {
         return repo.findHabitaciones(id).orElse(null);
     }
 

@@ -2,7 +2,7 @@ package com.gestionhotelera.api.app.ocupacion.controller;
 
 import com.gestionhotelera.cammons.habitaciones.model.ImagenesHabitacion;
 import com.gestionhotelera.cammons.habitaciones.model.TipoHabitacion;
-import com.gestionhotelera.cammons.habitaciones.model.habitaciones;
+import com.gestionhotelera.cammons.habitaciones.model.Habitaciones;
 import com.gestionhotelera.api.app.ocupacion.service.ITipoHabitaciónService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -40,7 +40,7 @@ public class TipoHabitacionController {
     public ResponseEntity<?> save(@PathVariable Character estado, @PathVariable Long idHabitacion, @PathVariable Long idTipoHabitacion){
         TipoHabitacion tipoHabitacion = service.find(idTipoHabitacion);
         if(tipoHabitacion == null) return ResponseEntity.notFound().build();
-        habitaciones habitaciones = service.findHabitaciones(idHabitacion);
+        Habitaciones habitaciones = service.findHabitaciones(idHabitacion);
         if(habitaciones == null) return ResponseEntity.notFound().build();
         habitaciones.setEstado(estado);
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(tipoHabitacion));

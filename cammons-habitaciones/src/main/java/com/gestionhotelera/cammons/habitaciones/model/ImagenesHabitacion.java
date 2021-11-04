@@ -17,7 +17,7 @@ public class ImagenesHabitacion implements Serializable {
     @JsonIgnoreProperties(value = {"imagenes"})
     @JoinColumn(name = "id_habitacion")
     @ManyToOne(fetch = FetchType.LAZY)
-    private habitaciones habitaciones;
+    private Habitaciones habitaciones;
 
 
     @Lob
@@ -33,7 +33,7 @@ public class ImagenesHabitacion implements Serializable {
         this.id = id;
     }
 
-    public void setHabitaciones(com.gestionhotelera.cammons.habitaciones.model.habitaciones habitaciones) {
+    public void setHabitaciones(Habitaciones habitaciones) {
         this.habitaciones = habitaciones;
     }
 
@@ -49,7 +49,7 @@ public class ImagenesHabitacion implements Serializable {
         return id;
     }
 
-    public com.gestionhotelera.cammons.habitaciones.model.habitaciones getHabitaciones() {
+    public Habitaciones getHabitaciones() {
         return habitaciones;
     }
 }

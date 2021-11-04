@@ -3,11 +3,12 @@ package com.gestionhotelera.cammons.habitaciones.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class habitaciones {
+public class Habitaciones {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_habitacion")
@@ -37,7 +38,20 @@ public class habitaciones {
         imagenesHabitacion.setHabitaciones(this);
     }
 
-    public habitaciones() {
+
+
+    @ManyToMany(mappedBy = "habitacion")
+    private List<CheckOut> checkouts;
+
+    public void setCheckouts(List<CheckOut> checkouts) {
+        this.checkouts = checkouts;
+    }
+
+    public List<CheckOut> getCheckouts() {
+        return checkouts;
+    }
+
+    public Habitaciones() {
         this.imagenes = new ArrayList<>();
     }
 
