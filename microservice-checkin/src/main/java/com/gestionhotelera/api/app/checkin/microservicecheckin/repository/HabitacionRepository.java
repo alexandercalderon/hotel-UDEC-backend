@@ -1,6 +1,6 @@
 package com.gestionhotelera.api.app.checkin.microservicecheckin.repository;
 
-import com.gestionhotelera.api.app.checkin.microservicecheckin.model.Habitacion;
+import com.gestionhotelera.cammons.habitaciones.model.Habitacion;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,8 +1,8 @@
 package com.gestionhotelera.api.app.checkin.microservicecheckin.service.implementation;
 
-import com.gestionhotelera.api.app.checkin.microservicecheckin.model.Usuario;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.repository.UsuarioRepository;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.service.IUsuarioService;
+import com.gestionhotelera.cammons.habitaciones.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

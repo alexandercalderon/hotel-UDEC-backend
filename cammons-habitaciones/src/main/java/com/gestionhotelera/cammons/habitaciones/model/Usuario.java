@@ -1,4 +1,4 @@
-package com.gestionhotelera.api.app.checkin.microservicecheckin.model;
+package com.gestionhotelera.cammons.habitaciones.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

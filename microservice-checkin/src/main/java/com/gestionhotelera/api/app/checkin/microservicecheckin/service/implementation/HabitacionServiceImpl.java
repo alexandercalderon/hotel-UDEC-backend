@@ -1,8 +1,8 @@
 package com.gestionhotelera.api.app.checkin.microservicecheckin.service.implementation;
 
-import com.gestionhotelera.api.app.checkin.microservicecheckin.model.Habitacion;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.repository.HabitacionRepository;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.service.IHabitacionService;
+import com.gestionhotelera.cammons.habitaciones.model.Habitacion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

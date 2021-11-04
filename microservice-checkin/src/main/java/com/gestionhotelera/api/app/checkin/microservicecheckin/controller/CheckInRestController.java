@@ -1,10 +1,10 @@
 package com.gestionhotelera.api.app.checkin.microservicecheckin.controller;
 
 import com.gestionhotelera.api.app.checkin.microservicecheckin.dto.UsuarioDTO;
-import com.gestionhotelera.api.app.checkin.microservicecheckin.model.CheckIn;
-import com.gestionhotelera.api.app.checkin.microservicecheckin.model.Usuario;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.service.ICheckInService;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.service.IUsuarioService;
+import com.gestionhotelera.cammons.habitaciones.model.CheckIn;
+import com.gestionhotelera.cammons.habitaciones.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;

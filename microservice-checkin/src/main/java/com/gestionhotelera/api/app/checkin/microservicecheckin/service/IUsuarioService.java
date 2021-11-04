@@ -1,6 +1,7 @@
 package com.gestionhotelera.api.app.checkin.microservicecheckin.service;
 
-import com.gestionhotelera.api.app.checkin.microservicecheckin.model.Usuario;
+
+import com.gestionhotelera.cammons.habitaciones.model.Usuario;
 
 import java.util.List;
 
