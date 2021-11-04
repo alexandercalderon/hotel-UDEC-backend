@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author jhonc
@@ -35,7 +37,15 @@ public class CheckIn {
     private LocalDate fechaSalida;
 
     @OneToOne
-    @PrimaryKeyJoinColumn
-    private Usuario usuario;
+    @JoinColumn(name = "id_persona", updatable = false, nullable = false)
+    private Persona persona;
+
+    @JoinTable(
+            name = "checkin_habitaciones",
+            joinColumns = @JoinColumn(name = "id_checkin",nullable = false ),
+            inverseJoinColumns = @JoinColumn(name = "id_habitacion", nullable = false)
+    )
+    @ManyToMany(cascade = CascadeType.ALL)
+    public List<Habitaciones> habitacionCheckIn;
 
 }

@@ -14,11 +14,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CheckInRepository extends JpaRepository<CheckIn,Long> {
 
-    @Query("select c from CheckIn c left join fetch c.usuario u where c.id=?1")
-    CheckIn getCheckInOf(Long id);
+    @Query("select c from CheckIn c left join fetch c.persona p left join fetch c.habitacionCheckIn h where c.id=?1")
+    CheckIn getCheckInForId(Long id);
 
     //@Query(value = "SELECT * FROM",nativeQuery = true)
-    @Query("select c from CheckIn  c left  join fetch  c.usuario u where u.cedula=?1")
-    CheckIn getCheckByCedulaOfUser(String cedula);
+    @Query("select c from CheckIn  c left  join fetch  c.persona p left join fetch c.habitacionCheckIn h where p.identificacion=?1")
+    CheckIn getCheckByIdentifiacionOfPerson(String identificacion);
 
 }

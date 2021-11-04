@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UsuarioDTO {
+public class PersonaDTO {
 
-    private String cedula;
+    private String identificacion;
 
 }

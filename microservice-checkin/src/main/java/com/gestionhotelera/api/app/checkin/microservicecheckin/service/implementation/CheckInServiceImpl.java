@@ -40,12 +40,12 @@ public class CheckInServiceImpl implements ICheckInService {
 
     @Override
     public CheckIn getCheckInOf(Long id) {
-        return checkInRepository.getCheckInOf(id);
+        return checkInRepository.getCheckInForId(id);
     }
 
     @Override
-    public CheckIn getCheckByCedula(String cedula) {
-        return checkInRepository.getCheckByCedulaOfUser(cedula);
+    public CheckIn getCheckByIdentificacion(String identificacion) {
+        return checkInRepository.getCheckByIdentifiacionOfPerson(identificacion);
     }
 
 

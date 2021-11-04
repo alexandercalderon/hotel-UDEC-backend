@@ -1,9 +1,10 @@
 package com.gestionhotelera.cammons.habitaciones.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.gestionhotelera.cammons.habitaciones.model.Habitaciones;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,6 +12,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "check_out")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CheckOut {
 
     @Id
@@ -45,59 +49,4 @@ public class CheckOut {
     @JoinColumn(name = "fk_persona", updatable = false, nullable = false)
     private Persona persona;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setHabitaciones(List<Habitaciones> habitaciones) {
-        this.habitacion = habitaciones;
-    }
-
-    public void setFechaIngreso(Date fechaIngreso) {
-        this.fechaIngreso = fechaIngreso;
-    }
-
-    public void setFechaEgreso(Date fechaEgreso) {
-        this.fechaEgreso = fechaEgreso;
-    }
-
-    public void setNumeroDias(Integer numeroDias) {
-        this.numeroDias = numeroDias;
-    }
-
-    public void setAdeudos(List<Adeudo> adeudos) {
-        this.adeudos = adeudos;
-    }
-
-    public void setPersona(Persona persona) {
-        this.persona = persona;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public List<Habitaciones> getHabitaciones() {
-        return habitacion;
-    }
-
-    public Date getFechaIngreso() {
-        return fechaIngreso;
-    }
-
-    public Date getFechaEgreso() {
-        return fechaEgreso;
-    }
-
-    public Integer getNumeroDias() {
-        return numeroDias;
-    }
-
-    public List<Adeudo> getAdeudos() {
-        return adeudos;
-    }
-
-    public Persona getPersona() {
-        return persona;
-    }
 }

@@ -1,6 +1,6 @@
 package com.gestionhotelera.api.app.checkin.microservicecheckin.repository;
 
-import com.gestionhotelera.cammons.habitaciones.model.Habitacion;
+import com.gestionhotelera.cammons.habitaciones.model.Persona;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,8 +11,8 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface HabitacionRepository extends JpaRepository<Habitacion,Long> {
+public interface PersonaRepository extends JpaRepository<Persona,Long> {
 
-    Habitacion findByNumeroHabitacion(Integer numeroHabitacion);
+    Persona findByIdentificacion (String cedula);
 
 }
