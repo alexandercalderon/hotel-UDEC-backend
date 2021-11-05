@@ -44,7 +44,7 @@ public class CheckInServiceImpl implements ICheckInService {
     }
 
     @Override
-    public CheckIn getCheckByIdentificacion(String identificacion) {
+    public CheckIn getCheckByIdentificacion(Long identificacion) {
         return checkInRepository.getCheckByIdentifiacionOfPerson(identificacion);
     }
 

@@ -1,9 +1,9 @@
 package com.gestionhotelera.cammons.habitaciones.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,10 +19,9 @@ public class Habitaciones {
 
     private Character estado;
 
-
-    @JsonIgnoreProperties(value = "habitaciones")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_tipo_habitacion")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private TipoHabitacion tipoHabitacion;
 
 
@@ -34,6 +33,7 @@ public class Habitaciones {
     @ManyToMany(mappedBy = "habitacion")
     private List<CheckOut> checkouts;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "habitacionCheckIn")
     private List<CheckIn> checkIns;
 

@@ -20,6 +20,6 @@ public interface ICheckInService {
 
     CheckIn getCheckInOf(Long id);
 
-    CheckIn getCheckByIdentificacion(String identificacion);
+    CheckIn getCheckByIdentificacion(Long identificacion);
 
 }

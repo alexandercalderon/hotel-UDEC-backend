@@ -15,6 +15,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PersonaDTO {
 
-    private String identificacion;
+    private Long identificacion;
 
 }

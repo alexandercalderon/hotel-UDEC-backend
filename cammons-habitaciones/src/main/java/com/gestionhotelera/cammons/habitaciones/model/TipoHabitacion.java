@@ -1,5 +1,6 @@
 package com.gestionhotelera.cammons.habitaciones.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -28,8 +29,8 @@ public class TipoHabitacion {
         this.habitaciones = new ArrayList<>();
     }
 
-    @JsonIgnoreProperties(value = "tipoHabitacion", allowSetters = true)
-    @OneToMany(mappedBy = "tipoHabitacion", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    @OneToMany(mappedBy = "tipoHabitacion", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Habitaciones> habitaciones;
 
     public void setIdTipoHabitacion(Long idTipoHabitacion) {
