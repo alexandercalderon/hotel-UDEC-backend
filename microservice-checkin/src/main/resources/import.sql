@@ -23,3 +23,10 @@ INSERT INTO checkin_habitaciones (id_checkin, id_habitacion) VALUES (1,2);
 INSERT INTO checkin_habitaciones (id_checkin, id_habitacion) VALUES (1,3);
 INSERT INTO checkin_habitaciones (id_checkin, id_habitacion) VALUES (2,4);
 INSERT INTO checkin_habitaciones (id_checkin, id_habitacion) VALUES (2,5);
+
+INSERT INTO imagenes_habitacion (imagen, id_habitacion) VALUES (pg_read_binary_file('C:\Java\Java-Spring\Spring_Boot\proyecto_aula\back-end\hotel-UDEC-backend\microservice-checkin\src\main\resources\static\img\habitacion1.jpg'),1);
+INSERT INTO imagenes_habitacion (imagen, id_habitacion) VALUES (pg_read_binary_file('C:\Java\Java-Spring\Spring_Boot\proyecto_aula\back-end\hotel-UDEC-backend\microservice-checkin\src\main\resources\static\img\habitacion2.png'),1);
+INSERT INTO imagenes_habitacion (imagen, id_habitacion) VALUES (pg_read_binary_file('C:\Java\Java-Spring\Spring_Boot\proyecto_aula\back-end\hotel-UDEC-backend\microservice-checkin\src\main\resources\static\img\habitacion3.jpg'),1);
+INSERT INTO imagenes_habitacion (imagen, id_habitacion) VALUES (pg_read_binary_file('C:\Java\Java-Spring\Spring_Boot\proyecto_aula\back-end\hotel-UDEC-backend\microservice-checkin\src\main\resources\static\img\habitacion1.jpg'),2);
+INSERT INTO imagenes_habitacion (imagen, id_habitacion) VALUES (pg_read_binary_file('C:\Java\Java-Spring\Spring_Boot\proyecto_aula\back-end\hotel-UDEC-backend\microservice-checkin\src\main\resources\static\img\habitacion5.jpg'),2);
+INSERT INTO imagenes_habitacion (imagen, id_habitacion) VALUES (pg_read_binary_file('C:\Java\Java-Spring\Spring_Boot\proyecto_aula\back-end\hotel-UDEC-backend\microservice-checkin\src\main\resources\static\img\habitacion6.jpg'),3);
