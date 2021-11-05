@@ -17,6 +17,7 @@ public class CheckOut {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnoreProperties(value = {"checkouts", "imagenes"}, allowSetters = true)
     @JoinTable(
             name = "checkout_habitaciones",
             joinColumns = @JoinColumn(name = "fk_check_out",nullable = false ),
@@ -37,19 +38,34 @@ public class CheckOut {
     @Column(name = "numero_dias")
     private Integer numeroDias;
 
-    @JsonIgnoreProperties(value = {"checkout"},allowSetters = true)
+    @JsonIgnoreProperties(value = {"checkOut"},allowSetters = true)
     @OneToMany(mappedBy = "checkout", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     public List<Adeudo> adeudos;
 
+
     @OneToOne
+    @JsonIgnoreProperties(value = {"checkOut"}, allowSetters = true)
     @JoinColumn(name = "fk_persona", updatable = false, nullable = false)
-    private Persona persona;
+    private Personas persona;
+
+    @OneToOne
+    @JsonIgnoreProperties(value = {"checkOut"}, allowSetters = true)
+    @JoinColumn(name = "fk_venta", updatable = false, nullable = false)
+    private Ventas ventas;
+
+    public void setVentas(Ventas ventas) {
+        this.ventas = ventas;
+    }
+
+    public Ventas getVentas() {
+        return ventas;
+    }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setHabitaciones(List<Habitaciones> habitaciones) {
+    public void setHabitacion(List<Habitaciones> habitaciones) {
         this.habitacion = habitaciones;
     }
 
@@ -69,7 +85,7 @@ public class CheckOut {
         this.adeudos = adeudos;
     }
 
-    public void setPersona(Persona persona) {
+    public void setPersona(Personas persona) {
         this.persona = persona;
     }
 
@@ -77,7 +93,7 @@ public class CheckOut {
         return id;
     }
 
-    public List<Habitaciones> getHabitaciones() {
+    public List<Habitaciones> getHabitacion() {
         return habitacion;
     }
 
@@ -97,7 +113,7 @@ public class CheckOut {
         return adeudos;
     }
 
-    public Persona getPersona() {
+    public Personas getPersona() {
         return persona;
     }
 }

@@ -1,12 +1,13 @@
 package com.gestionhotelera.cammons.habitaciones.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "personas")
-public class Persona {
+public class Personas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
