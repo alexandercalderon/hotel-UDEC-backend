@@ -1,9 +1,9 @@
 package com.gestionhotelera.cammons.habitaciones.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,10 +19,9 @@ public class Habitaciones {
 
     private Character estado;
 
-
-    @JsonIgnoreProperties(value = "habitaciones")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_tipo_habitacion")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private TipoHabitacion tipoHabitacion;
 
 
@@ -30,18 +29,16 @@ public class Habitaciones {
     @OneToMany(mappedBy = "habitaciones", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ImagenesHabitacion> imagenes;
 
-    public void setImagenes(List<ImagenesHabitacion> imagenes) {
-        this.imagenes = imagenes;
-    }
-    public void addImagen(ImagenesHabitacion imagenesHabitacion){
-        this.imagenes.add(imagenesHabitacion);
-        imagenesHabitacion.setHabitaciones(this);
-    }
-
-
 
     @ManyToMany(mappedBy = "habitacion")
     private List<CheckOut> checkouts;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "habitacionCheckIn")
+    private List<CheckIn> checkIns;
+
+
+    //TODO: GETTERS an SETTERS
 
     public void setCheckouts(List<CheckOut> checkouts) {
         this.checkouts = checkouts;
@@ -90,5 +87,21 @@ public class Habitaciones {
 
     public void setTipoHabitacion(TipoHabitacion tipoHabitacion) {
         this.tipoHabitacion = tipoHabitacion;
+    }
+
+    public void setImagenes(List<ImagenesHabitacion> imagenes) {
+        this.imagenes = imagenes;
+    }
+    public void addImagen(ImagenesHabitacion imagenesHabitacion){
+        this.imagenes.add(imagenesHabitacion);
+        imagenesHabitacion.setHabitaciones(this);
+    }
+
+    public List<CheckIn> getCheckIns() {
+        return checkIns;
+    }
+
+    public void setCheckIns(List<CheckIn> checkIns) {
+        this.checkIns = checkIns;
     }
 }

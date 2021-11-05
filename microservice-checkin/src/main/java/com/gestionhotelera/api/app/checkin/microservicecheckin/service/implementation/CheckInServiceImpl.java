@@ -1,8 +1,8 @@
 package com.gestionhotelera.api.app.checkin.microservicecheckin.service.implementation;
 
-import com.gestionhotelera.api.app.checkin.microservicecheckin.model.CheckIn;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.repository.CheckInRepository;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.service.ICheckInService;
+import com.gestionhotelera.cammons.habitaciones.model.CheckIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,12 +40,12 @@ public class CheckInServiceImpl implements ICheckInService {
 
     @Override
     public CheckIn getCheckInOf(Long id) {
-        return checkInRepository.getCheckInOf(id);
+        return checkInRepository.getCheckInForId(id);
     }
 
     @Override
-    public CheckIn getCheckByCedula(String cedula) {
-        return checkInRepository.getCheckByCedulaOfUser(cedula);
+    public CheckIn getCheckByIdentificacion(Long identificacion) {
+        return checkInRepository.getCheckByIdentifiacionOfPerson(identificacion);
     }
 
 

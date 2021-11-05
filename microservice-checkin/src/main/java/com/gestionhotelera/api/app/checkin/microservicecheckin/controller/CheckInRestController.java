@@ -1,10 +1,8 @@
 package com.gestionhotelera.api.app.checkin.microservicecheckin.controller;
 
-import com.gestionhotelera.api.app.checkin.microservicecheckin.dto.UsuarioDTO;
-import com.gestionhotelera.api.app.checkin.microservicecheckin.model.CheckIn;
-import com.gestionhotelera.api.app.checkin.microservicecheckin.model.Usuario;
+import com.gestionhotelera.api.app.checkin.microservicecheckin.dto.PersonaDTO;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.service.ICheckInService;
-import com.gestionhotelera.api.app.checkin.microservicecheckin.service.IUsuarioService;
+import com.gestionhotelera.cammons.habitaciones.model.CheckIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -30,9 +28,6 @@ public class CheckInRestController {
 
     @Autowired
     private ICheckInService checkInService;
-
-    @Autowired
-    private IUsuarioService usuarioService;
 
     @GetMapping("/all")
     public ResponseEntity<?> allCheckIn(){
@@ -64,19 +59,20 @@ public class CheckInRestController {
         return new ResponseEntity<>(checkIn, HttpStatus.OK);
     }
 
-    @PostMapping("/get/cedula")
-    public ResponseEntity<?> viewCheckInByCedula(@RequestBody UsuarioDTO usuarioDTO){
+    @PostMapping("/get/identificacion")
+    public ResponseEntity<?> viewCheckInByCedula(@RequestBody PersonaDTO personaDTO){
         CheckIn checkIn = null;
         Map<String, Object> response = new HashMap<>();
         try{
-            checkIn = checkInService.getCheckByCedula(usuarioDTO.getCedula());
+            //todo
+            checkIn = checkInService.getCheckByIdentificacion(personaDTO.getIdentificacion());
         }catch (DataAccessException e){
             response.put("mensaje", "Error al realizar la consulta en la base de datos");
             response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         if(checkIn == null){
-            response.put("mensaje","El Check-in asociada a esta cedula " + usuarioDTO.getCedula()
+            response.put("mensaje","El Check-in asociada a esta cedula " + personaDTO.getIdentificacion()
                     + ", no existe");
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 
@@ -85,10 +81,10 @@ public class CheckInRestController {
     }
 
 
-    @PostMapping(value = "/save/{idUsuario}")
-    public ResponseEntity<?> createCheckIn(@Valid @RequestBody CheckIn checkIn, BindingResult result
-            , @PathVariable Long idUsuario) {
-        Usuario usuario = usuarioService.getUsuarioById(idUsuario);
+    //Crear un check-in y se le asigna el usario por @PathVariable
+    @PostMapping(value = "/save")
+    public ResponseEntity<?> createCheckIn(@Valid @RequestBody CheckIn checkIn, BindingResult result) {
+        //todo
         Map<String, Object> response = new HashMap<>();
         if (result.hasErrors()) {
             List<String> errors = result.getFieldErrors().stream()
@@ -98,10 +94,9 @@ public class CheckInRestController {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
         try {
-            checkIn.setUsuario(usuario);
             checkInService.saveCheckIn(checkIn);
         } catch (DataAccessException e) {
-            response.put("mensaje", "Error al crear el Cliente");
+            response.put("mensaje", "Error al CheckIn");
             response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }

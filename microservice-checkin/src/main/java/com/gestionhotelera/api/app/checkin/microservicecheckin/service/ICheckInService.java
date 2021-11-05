@@ -1,6 +1,7 @@
 package com.gestionhotelera.api.app.checkin.microservicecheckin.service;
 
-import com.gestionhotelera.api.app.checkin.microservicecheckin.model.CheckIn;
+
+import com.gestionhotelera.cammons.habitaciones.model.CheckIn;
 
 import java.util.List;
 
@@ -19,6 +20,6 @@ public interface ICheckInService {
 
     CheckIn getCheckInOf(Long id);
 
-    CheckIn getCheckByCedula(String cedula);
+    CheckIn getCheckByIdentificacion(Long identificacion);
 
 }

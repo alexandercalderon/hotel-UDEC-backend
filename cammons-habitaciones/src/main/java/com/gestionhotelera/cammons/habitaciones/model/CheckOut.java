@@ -1,9 +1,10 @@
 package com.gestionhotelera.cammons.habitaciones.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.gestionhotelera.cammons.habitaciones.model.Habitaciones;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,6 +12,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "check_out")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CheckOut {
 
     @Id

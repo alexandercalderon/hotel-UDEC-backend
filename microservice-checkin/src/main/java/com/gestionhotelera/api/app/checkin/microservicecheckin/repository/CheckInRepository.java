@@ -1,6 +1,6 @@
 package com.gestionhotelera.api.app.checkin.microservicecheckin.repository;
 
-import com.gestionhotelera.api.app.checkin.microservicecheckin.model.CheckIn;
+import com.gestionhotelera.cammons.habitaciones.model.CheckIn;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -14,11 +14,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CheckInRepository extends JpaRepository<CheckIn,Long> {
 
-    @Query("select c from CheckIn c left join fetch c.usuario u where c.id=?1")
-    CheckIn getCheckInOf(Long id);
+    @Query("select c from CheckIn c left join fetch c.persona p left join fetch c.habitacionCheckIn h left  join fetch h.tipoHabitacion t where c.id=?1")
+    CheckIn getCheckInForId(Long id);
 
     //@Query(value = "SELECT * FROM",nativeQuery = true)
-    @Query("select c from CheckIn  c left  join fetch  c.usuario u where u.cedula=?1")
-    CheckIn getCheckByCedulaOfUser(String cedula);
+    @Query("select c from CheckIn  c left  join fetch  c.persona p left join fetch c.habitacionCheckIn h left  join fetch h.tipoHabitacion t where p.identificacion=?1")
+    CheckIn getCheckByIdentifiacionOfPerson(Long identificacion);
 
 }
