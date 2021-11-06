@@ -5,15 +5,16 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "check_out")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class CheckOut {
 
@@ -47,15 +48,20 @@ public class CheckOut {
     public List<Adeudo> adeudos;
 
 
-    @OneToOne
+    @OneToOne()
     @JsonIgnoreProperties(value = {"checkOut"}, allowSetters = true)
     @JoinColumn(name = "fk_persona", updatable = false, nullable = false)
     private Personas persona;
 
-    @OneToOne
+    @OneToOne()
     @JsonIgnoreProperties(value = {"checkOut"}, allowSetters = true)
     @JoinColumn(name = "fk_venta", updatable = false, nullable = false)
     private Ventas ventas;
+
+    public CheckOut(){
+        this.adeudos = new ArrayList<>();
+        this.habitacion = new ArrayList<>();
+    }
 
     public void setVentas(Ventas ventas) {
         this.ventas = ventas;
@@ -71,6 +77,10 @@ public class CheckOut {
 
     public void setHabitacion(List<Habitaciones> habitaciones) {
         this.habitacion = habitaciones;
+    }
+
+    public void addHabitacion(Habitaciones habitaciones) {
+        this.habitacion.add(habitaciones);
     }
 
     public void setFechaIngreso(Date fechaIngreso) {
@@ -89,6 +99,9 @@ public class CheckOut {
         this.adeudos = adeudos;
     }
 
+    public void addAdeudos(Adeudo adeudos) {
+        this.adeudos.add(adeudos);
+    }
     public void setPersona(Personas persona) {
         this.persona = persona;
     }

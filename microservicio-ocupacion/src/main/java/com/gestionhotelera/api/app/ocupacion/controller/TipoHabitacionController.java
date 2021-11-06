@@ -52,4 +52,11 @@ public class TipoHabitacionController {
         filtrado = filtrado.stream().distinct().collect(Collectors.toList());
         return ResponseEntity.ok().body(filtrado);
     }
+
+    @GetMapping("/find/{id}")
+    public ResponseEntity<Habitaciones> find(@PathVariable Long id){
+        Habitaciones habitaciones = service.findHabitaciones(id);
+        if(habitaciones == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok().body(habitaciones);
+    }
 }

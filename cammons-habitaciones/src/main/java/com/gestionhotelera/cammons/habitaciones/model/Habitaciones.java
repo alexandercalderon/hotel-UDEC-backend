@@ -38,10 +38,17 @@ public class Habitaciones {
     private List<CheckIn> checkIns;
 
 
+
+
     //TODO: GETTERS an SETTERS
+
+
 
     public void setCheckouts(List<CheckOut> checkouts) {
         this.checkouts = checkouts;
+    }
+    public void addCheckouts(CheckOut checkOut){
+        this.checkouts.add(checkOut);
     }
 
     public List<CheckOut> getCheckouts() {
@@ -50,6 +57,7 @@ public class Habitaciones {
 
     public Habitaciones() {
         this.imagenes = new ArrayList<>();
+        this.checkouts = new ArrayList<>();
     }
 
     public List<ImagenesHabitacion> getImagenes() {

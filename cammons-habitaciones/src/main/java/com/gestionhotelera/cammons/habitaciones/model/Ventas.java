@@ -19,20 +19,10 @@ public class Ventas {
     @Column(name = "total_venta")
     private Long totalVente;
 
-    @OneToOne(mappedBy = "ventas", cascade = CascadeType.ALL)
-    private CheckOut checkOut;
-
-    public CheckOut getCheckOut() {
-        return checkOut;
-    }
-
     public void setPago(Pagos pago) {
         this.pago = pago;
     }
 
-    public void setCheckOut(CheckOut checkOut) {
-        this.checkOut = checkOut;
-    }
 
     public Pagos getPago() {
         return pago;
