@@ -1,6 +1,8 @@
 package com.gestionhotelera.api.app.checkin.microservicecheckin.controller;
 
+import com.gestionhotelera.api.app.checkin.microservicecheckin.dto.CheckInDTO;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.dto.PersonaDTO;
+import com.gestionhotelera.api.app.checkin.microservicecheckin.mappedBy.CheckMappedBy;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.service.ICheckInService;
 import com.gestionhotelera.cammons.habitaciones.model.CheckIn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,29 +32,29 @@ public class CheckInRestController {
     private ICheckInService checkInService;
 
     @GetMapping("/all")
-    public ResponseEntity<?> allCheckIn(){
+    public ResponseEntity<?> allCheckIn() {
         Map<String, Object> response = new HashMap<>();
         List<CheckIn> lista = checkInService.getAllChechIn();
-        if(lista.isEmpty()){
-            response.put("mensaje","No hay Check-In's");
-            return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
+        if (lista.isEmpty()) {
+            response.put("mensaje", "No hay Check-In's");
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<?> getCheckInById(@PathVariable Long id){
+    public ResponseEntity<?> getCheckInById(@PathVariable Long id) {
         CheckIn checkIn = null;
         Map<String, Object> response = new HashMap<>();
-        try{
+        try {
             checkIn = checkInService.getCheckInOf(id);
-        }catch (DataAccessException e){
+        } catch (DataAccessException e) {
             response.put("mensaje", "Error al realizar la consulta en la base de datos");
             response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        if(checkIn == null){
-            response.put("mensaje","El Check-in con id: " + id + ", no existe");
+        if (checkIn == null) {
+            response.put("mensaje", "El Check-in con id: " + id + ", no existe");
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 
         }
@@ -60,24 +62,27 @@ public class CheckInRestController {
     }
 
     @PostMapping("/get/identificacion")
-    public ResponseEntity<?> viewCheckInByCedula(@RequestBody PersonaDTO personaDTO){
+    public ResponseEntity<?> viewCheckInByCedula(@RequestBody PersonaDTO personaDTO) {
         CheckIn checkIn = null;
+        CheckMappedBy checkMappedBy = new CheckMappedBy();
+        CheckInDTO checkInDTO = null;
         Map<String, Object> response = new HashMap<>();
-        try{
+        try {
             //todo
             checkIn = checkInService.getCheckByIdentificacion(personaDTO.getIdentificacion());
-        }catch (DataAccessException e){
+            if (checkIn == null) {
+                response.put("mensaje", "El Check-in asociada a esta cedula " + personaDTO.getIdentificacion()
+                        + ", no existe");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }else{
+                checkInDTO = checkMappedBy.checkInToCheckInDTO(checkIn);
+            }
+        } catch (DataAccessException e) {
             response.put("mensaje", "Error al realizar la consulta en la base de datos");
             response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        if(checkIn == null){
-            response.put("mensaje","El Check-in asociada a esta cedula " + personaDTO.getIdentificacion()
-                    + ", no existe");
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-
-        }
-        return new ResponseEntity<>(checkIn, HttpStatus.OK);
+        return new ResponseEntity<>(checkInDTO, HttpStatus.OK);
     }
 
 
