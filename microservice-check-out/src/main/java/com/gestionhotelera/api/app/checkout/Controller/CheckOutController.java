@@ -1,5 +1,6 @@
 package com.gestionhotelera.api.app.checkout.Controller;
 
+import com.gestionhotelera.api.app.checkout.client.IClientHabitaciones;
 import com.gestionhotelera.api.app.checkout.service.ICheckOutService;
 import com.gestionhotelera.api.app.checkout.service.IVentaService;
 import com.gestionhotelera.api.app.checkout.service.IpersonService;
@@ -9,13 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Period;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 public class CheckOutController {
@@ -28,6 +23,9 @@ public class CheckOutController {
 
     @Autowired
     private IVentaService ventaService;
+
+    @Autowired
+    private IClientHabitaciones client;
 
     @GetMapping("/list")
     public ResponseEntity<List<CheckOut>> list(){
@@ -67,14 +65,23 @@ public class CheckOutController {
     }
 
     @PutMapping("/add-habitaciones/{id}/{idHabitacion}")
-    public ResponseEntity<CheckOut> addHabitaciones(@RequestBody List<Habitaciones> habitaciones, @PathVariable Long id, @PathVariable Integer idHabitacion){
+    public ResponseEntity<CheckOut> addHabitaciones(@PathVariable Long id, @PathVariable Long idHabitacion){
         CheckOut checkOut = service.find(id);
         if(checkOut == null) return ResponseEntity.badRequest().build();
-        Habitaciones habitacion =
-        for(Habitaciones habitacion: habitaciones){
-            habitacion.addCheckouts(checkOut);
-            checkOut.addHabitacion(habitacion);
-        }
+        Habitaciones habitacion = client.find(idHabitacion);
+        if(habitacion == null) return ResponseEntity.notFound().build();
+        habitacion.addCheckouts(checkOut);
+        checkOut.addHabitacion(habitacion);
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(checkOut));
+    }
+
+    @PutMapping("/add-pago/{id}")
+    public ResponseEntity<Ventas> addPago(@PathVariable Integer id, @RequestBody Pagos pagos){
+        Ventas ventas = ventaService.find(id);
+        if(ventas == null) return ResponseEntity.badRequest().build();
+        pagos.setVenta(ventas);
+        ventas.setPago(pagos);
+        return ResponseEntity.status(HttpStatus.CREATED).body(ventaService.save(ventas));
     }
 
 }
