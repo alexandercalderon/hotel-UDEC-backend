@@ -21,7 +21,7 @@ public class Habitaciones {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_tipo_habitacion")
-    @JsonIgnoreProperties(value = "habitaciones")
+    @JsonIgnoreProperties(value = {"habitaciones","hibernateLazyInitializer", "handler"})
     private TipoHabitacion tipoHabitacion;
 
 
