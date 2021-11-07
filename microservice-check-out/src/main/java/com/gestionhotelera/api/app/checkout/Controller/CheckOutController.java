@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class CheckOutController {
 
     @Autowired
@@ -82,6 +83,11 @@ public class CheckOutController {
         pagos.setVenta(ventas);
         ventas.setPago(pagos);
         return ResponseEntity.status(HttpStatus.CREATED).body(ventaService.save(ventas));
+    }
+
+    @GetMapping("/find/{identificacion}")
+    public ResponseEntity<CheckOut> find(@PathVariable Long identificacion){
+        return ResponseEntity.ok().body(service.findByIdentificacion(identificacion));
     }
 
 }

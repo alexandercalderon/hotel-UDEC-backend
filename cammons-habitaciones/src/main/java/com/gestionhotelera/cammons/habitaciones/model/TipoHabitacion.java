@@ -29,7 +29,8 @@ public class TipoHabitacion {
         this.habitaciones = new ArrayList<>();
     }
 
-    @JsonIgnore
+
+    @JsonIgnoreProperties(value = {"checkouts"})
     @OneToMany(mappedBy = "tipoHabitacion", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Habitaciones> habitaciones;
 

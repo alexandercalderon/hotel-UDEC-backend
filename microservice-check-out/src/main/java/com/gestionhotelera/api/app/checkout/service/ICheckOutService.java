@@ -8,4 +8,5 @@ public interface ICheckOutService {
     public List<CheckOut> list();
     public CheckOut save(CheckOut checkOut);
     public CheckOut find(Long id);
+    public CheckOut findByIdentificacion(Long dentificacion);
 }

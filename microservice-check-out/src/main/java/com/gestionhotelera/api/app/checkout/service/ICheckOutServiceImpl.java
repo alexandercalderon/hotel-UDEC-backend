@@ -31,4 +31,9 @@ public class ICheckOutServiceImpl implements ICheckOutService{
     public CheckOut find(Long id) {
         return  checkOutRepo.findById(id).orElse(null);
     }
+
+    @Override
+    public CheckOut findByIdentificacion(Long dentificacion) {
+        return checkOutRepo.findbyIdentifiacion(dentificacion);
+    }
 }
