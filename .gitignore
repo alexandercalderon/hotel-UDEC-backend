@@ -6,7 +6,11 @@ target/
 
 ### STS ###
 .apt_generated
+<<<<<<< HEAD
 .classpa
+=======
+.classpath
+>>>>>>> 490a757 (Se agrega el proyecto)
 .factorypath
 .project
 .settings
@@ -30,4 +34,8 @@ build/
 !**/src/test/**/build/
 
 ### VS Code ###
+<<<<<<< HEAD
 .vscode/
+=======
+.vscode/
+>>>>>>> 490a757 (Se agrega el proyecto)
