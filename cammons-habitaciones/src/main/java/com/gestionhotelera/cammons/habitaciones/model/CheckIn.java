@@ -1,11 +1,13 @@
 package com.gestionhotelera.cammons.habitaciones.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -21,7 +23,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CheckIn {
+public class CheckIn implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,9 +33,11 @@ public class CheckIn {
     private Integer numeroDias;
 
     @NotNull
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate fechaIngreso;
 
     @NotNull
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate fechaSalida;
 
     @OneToOne

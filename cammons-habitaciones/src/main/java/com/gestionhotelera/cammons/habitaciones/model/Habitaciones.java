@@ -29,7 +29,7 @@ public class Habitaciones {
     @OneToMany(mappedBy = "habitaciones", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ImagenesHabitacion> imagenes;
 
-
+    @JsonIgnore
     @ManyToMany(mappedBy = "habitacion")
     private List<CheckOut> checkouts;
 

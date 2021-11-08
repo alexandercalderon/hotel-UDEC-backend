@@ -13,6 +13,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PersonaRepository extends JpaRepository<Personas,Long> {
 
-    Personas findByIdentificacion (String cedula);
+    Personas findByIdentificacion (Long identificacion);
 
 }

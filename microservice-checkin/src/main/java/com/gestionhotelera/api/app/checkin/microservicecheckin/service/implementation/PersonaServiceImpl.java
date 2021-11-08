@@ -27,7 +27,7 @@ public class PersonaServiceImpl implements IPersonaService {
     }
 
     @Override
-    public Personas getPersonaByIdentificacion(String identificacion) {
+    public Personas getPersonaByIdentificacion(Long identificacion) {
         return personaRepository.findByIdentificacion(identificacion);
     }
     @Override

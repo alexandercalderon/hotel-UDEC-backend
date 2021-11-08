@@ -1,18 +1,21 @@
 package com.gestionhotelera.api.app.checkin.microservicecheckin.controller;
 
 import com.gestionhotelera.api.app.checkin.microservicecheckin.dto.CheckInDTO;
+import com.gestionhotelera.api.app.checkin.microservicecheckin.dto.NewCheckInDTO;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.dto.PersonaDTO;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.mappedBy.CheckMappedBy;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.service.ICheckInService;
+import com.gestionhotelera.api.app.checkin.microservicecheckin.service.IHabitacionService;
+import com.gestionhotelera.api.app.checkin.microservicecheckin.service.IPersonaService;
 import com.gestionhotelera.cammons.habitaciones.model.CheckIn;
+import com.gestionhotelera.cammons.habitaciones.model.Habitaciones;
+import com.gestionhotelera.cammons.habitaciones.model.Personas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +33,15 @@ public class CheckInRestController {
 
     @Autowired
     private ICheckInService checkInService;
+
+    @Autowired
+    private IPersonaService personaService;
+
+    @Autowired
+    private IHabitacionService habitacionService;
+
+    @Autowired
+    private CheckMappedBy checkMappedBy;
 
     @GetMapping("/all")
     public ResponseEntity<?> allCheckIn() {
@@ -64,7 +76,6 @@ public class CheckInRestController {
     @PostMapping("/get/identificacion")
     public ResponseEntity<?> viewCheckInByCedula(@RequestBody PersonaDTO personaDTO) {
         CheckIn checkIn = null;
-        CheckMappedBy checkMappedBy = new CheckMappedBy();
         CheckInDTO checkInDTO = null;
         Map<String, Object> response = new HashMap<>();
         try {
@@ -88,23 +99,27 @@ public class CheckInRestController {
 
     //Crear un check-in y se le asigna el usario por @PathVariable
     @PostMapping(value = "/save")
-    public ResponseEntity<?> createCheckIn(@Valid @RequestBody CheckIn checkIn, BindingResult result) {
-        //todo
+    public ResponseEntity<?> createCheckIn(@RequestBody NewCheckInDTO dto) {
+        CheckIn checkIn = new CheckIn();
+        List<Habitaciones> habitaciones = null;
+        Personas persona = null;
         Map<String, Object> response = new HashMap<>();
-        if (result.hasErrors()) {
-            List<String> errors = result.getFieldErrors().stream()
-                    .map(err -> "El campo: [" + err.getField() + "]: " + err.getDefaultMessage())
-                    .collect(Collectors.toList());
-            response.put("errors", errors);
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-        }
         try {
-            checkInService.saveCheckIn(checkIn);
+            persona = personaService.getPersonaByIdentificacion(dto.getIdentificadorPersona());
+            habitaciones = dto.getHabitaciones().stream()
+                    .map(h -> habitacionService.getHabitacionByNumeroHabitacion(h.getNumeroHabitacion()))
+                    .collect(Collectors.toList());
         } catch (DataAccessException e) {
-            response.put("mensaje", "Error al CheckIn");
+            response.put("mensaje", "Error al crear el CheckIn");
             response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        checkIn.setNumeroDias(dto.getNumeroDias());
+        checkIn.setFechaIngreso(dto.getFechaIngreso());
+        checkIn.setFechaSalida(dto.getFechaSalida());
+        checkIn.setPersona(persona);
+        checkIn.setHabitacionCheckIn(habitaciones);
+        checkInService.saveCheckIn(checkIn);
         response.put("mensaje", "Check-In creado con exito");
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }

@@ -14,7 +14,7 @@ public interface IPersonaService {
 
     List<Personas> getAllPersonas();
 
-    Personas getPersonaByIdentificacion(String identificacion);
+    Personas getPersonaByIdentificacion(Long identificacion);
 
     Personas getPersonaById(Long id);
 
