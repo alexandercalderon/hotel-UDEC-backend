@@ -5,6 +5,7 @@ import com.gestionhotelera.api.app.checkout.service.ICheckOutService;
 import com.gestionhotelera.api.app.checkout.service.IVentaService;
 import com.gestionhotelera.api.app.checkout.service.IpersonService;
 import com.gestionhotelera.cammons.habitaciones.model.*;
+import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -88,6 +89,16 @@ public class CheckOutController {
     @GetMapping("/find/{identificacion}")
     public ResponseEntity<CheckOut> find(@PathVariable Long identificacion){
         return ResponseEntity.ok().body(service.findByIdentificacion(identificacion));
+    }
+
+    @GetMapping("/habitacion/{num}")
+    public ResponseEntity<Habitaciones> findByNum(@PathVariable Long num){
+        try {
+           Habitaciones habitaciones = client.findByNumHabitacion(num);
+            return ResponseEntity.ok().body(habitaciones);
+        } catch (FeignException e){
+            return  ResponseEntity.notFound().build();
+        }
     }
 
 }
