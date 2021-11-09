@@ -12,7 +12,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -26,6 +28,7 @@ public class TipoHabitacionController {
     public ResponseEntity<List<TipoHabitacion>> list(){
         return ResponseEntity.ok().body(service.list());
     }
+
 
     @GetMapping("/show/{habitacion}/{imagen}")
     public ResponseEntity<?> find(@PathVariable Long habitacion, @PathVariable Long imagen){
