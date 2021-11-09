@@ -41,14 +41,13 @@ public class CheckIn implements Serializable {
     private LocalDate fechaSalida;
 
     @OneToOne
-    @JoinColumn(name = "id_persona", updatable = false, nullable = false)
+    @JoinColumn(name = "id_persona", nullable = false,unique = true)
     private Personas persona;
 
-    @JoinTable(
-            name = "checkin_habitaciones",
-            joinColumns = @JoinColumn(name = "id_checkin",nullable = false ),
-            inverseJoinColumns = @JoinColumn(name = "id_habitacion", nullable = false)
-    )
+    @JoinTable(name = "checkin_habitaciones",
+            joinColumns = @JoinColumn(name = "id_checkin",nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "id_habitacion", nullable = false, unique = true)
+            ,uniqueConstraints = {@UniqueConstraint(columnNames = {"id_checkin","id_habitacion"})})
     @ManyToMany(cascade = CascadeType.ALL)
     public List<Habitaciones> habitacionCheckIn;
 

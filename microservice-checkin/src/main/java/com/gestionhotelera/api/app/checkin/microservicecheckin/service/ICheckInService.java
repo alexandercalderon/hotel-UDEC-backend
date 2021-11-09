@@ -22,4 +22,6 @@ public interface ICheckInService {
 
     CheckIn getCheckByIdentificacion(Long identificacion);
 
+    void deleteCheckInById(Long id);
+
 }

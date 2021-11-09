@@ -17,6 +17,10 @@ INSERT INTO habitaciones (estado, num_habitacion, id_tipo_habitacion) VALUES ('L
 INSERT INTO habitaciones (estado, num_habitacion, id_tipo_habitacion) VALUES ('O',51, 1);
 INSERT INTO habitaciones (estado, num_habitacion, id_tipo_habitacion) VALUES ('R',45, 4);
 INSERT INTO habitaciones (estado, num_habitacion, id_tipo_habitacion) VALUES ('D',96, 4);
+INSERT INTO habitaciones (estado, num_habitacion, id_tipo_habitacion) VALUES ('D',203, 1);
+INSERT INTO habitaciones (estado, num_habitacion, id_tipo_habitacion) VALUES ('D',2, 2);
+INSERT INTO habitaciones (estado, num_habitacion, id_tipo_habitacion) VALUES ('D',99, 3);
+INSERT INTO habitaciones (estado, num_habitacion, id_tipo_habitacion) VALUES ('D',21, 4);
 
 INSERT INTO checkin_habitaciones (id_checkin, id_habitacion) VALUES (1,1);
 INSERT INTO checkin_habitaciones (id_checkin, id_habitacion) VALUES (1,2);

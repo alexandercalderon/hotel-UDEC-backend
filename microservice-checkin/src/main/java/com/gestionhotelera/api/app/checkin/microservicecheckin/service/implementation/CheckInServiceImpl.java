@@ -48,5 +48,10 @@ public class CheckInServiceImpl implements ICheckInService {
         return checkInRepository.getCheckByIdentifiacionOfPerson(identificacion);
     }
 
+    @Override
+    public void deleteCheckInById(Long id) {
+        checkInRepository.deleteById(id);
+    }
+
 
 }
