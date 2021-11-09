@@ -10,4 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface IClientHabitaciones {
     @GetMapping("/find/{id}")
     public Habitaciones find(@PathVariable Long id);
+
+    @GetMapping("/habitacion/{numHabitacion}")
+    public Habitaciones findByNumHabitacion(@PathVariable Long numHabitacion);
 }

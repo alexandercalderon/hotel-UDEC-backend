@@ -13,4 +13,5 @@ public interface ITipoHabitaciónService {
     public Habitaciones findHabitaciones(Long id);
     public TipoHabitacion save(TipoHabitacion tipoHabitacion);
     public List<TipoHabitacion> filtrado(Character estado);
+    public Habitaciones findByNummHabitacion(Long numHhabitacion);
 }

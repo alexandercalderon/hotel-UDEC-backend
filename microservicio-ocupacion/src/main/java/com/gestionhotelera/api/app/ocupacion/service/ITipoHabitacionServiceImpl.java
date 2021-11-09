@@ -54,5 +54,10 @@ public class ITipoHabitacionServiceImpl implements ITipoHabitaciónService{
         return repo.filtrar(estado);
     }
 
+    @Override
+    public Habitaciones findByNummHabitacion(Long numHhabitacion) {
+        return repo.findByNumHabitacion(numHhabitacion);
+    }
+
 
 }

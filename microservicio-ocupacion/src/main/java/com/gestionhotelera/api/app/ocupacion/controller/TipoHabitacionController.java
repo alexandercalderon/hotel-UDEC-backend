@@ -59,4 +59,11 @@ public class TipoHabitacionController {
         if(habitaciones == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok().body(habitaciones);
     }
+
+    @GetMapping("/habitacion/{numHabitacion}")
+    public ResponseEntity<Habitaciones> findByNumHabitacion(@PathVariable Long numHabitacion){
+        Habitaciones habitaciones = service.findByNummHabitacion(numHabitacion);
+        if(habitaciones == null) return  ResponseEntity.notFound().build();
+        return ResponseEntity.ok().body(habitaciones);
+    }
 }
