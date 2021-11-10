@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 import java.util.Optional;
 
-
 public interface ITipoHabitacionesRepo extends JpaRepository<TipoHabitacion, Long> {
 
     @Query("select  i from ImagenesHabitacion  i join  fetch  i.habitaciones h where h.idHabitacion=?1 and  i.id=?2")
