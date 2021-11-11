@@ -12,6 +12,7 @@ import com.gestionhotelera.cammons.habitaciones.model.Habitaciones;
 import com.gestionhotelera.cammons.habitaciones.model.Personas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
  * @since 5/11/2021
  */
 @Component
+@Transactional
 public class CheckMappedBy {
 
 

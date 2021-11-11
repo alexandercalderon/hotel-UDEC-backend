@@ -66,7 +66,7 @@ public class CheckInRestController {
         try {
             checkIn = checkInService.getCheckInOf(id);
             if (checkIn == null) {
-                response.put("mensaje", "El Check-in con id: " + id + ", no existe");
+                response.put("mensaje", "El Check-in con id [" + id + "] no existe");
                 return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
             }else{
                 checkInDTO = checkMappedBy.checkInToCheckInDTO(checkIn);
@@ -76,8 +76,8 @@ public class CheckInRestController {
             response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        return new ResponseEntity<>(checkInDTO, HttpStatus.OK);
+        response.put("checkIn", checkInDTO);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/get/identificacion")
@@ -85,7 +85,13 @@ public class CheckInRestController {
         CheckIn checkIn = null;
         CheckInDTO checkInDTO = null;
         Map<String, Object> response = new HashMap<>();
+        Personas p = null;
         try {
+            p = personaService.getPersonaByIdentificacion(personaDTO.getIdentificacion());
+            if(p == null){
+                response.put("mensaje","El usuario no existe");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
             checkIn = checkInService.getCheckByIdentificacion(personaDTO.getIdentificacion());
             if (checkIn == null) {
                 response.put("mensaje", "El Check-in asociada a esta cedula " + personaDTO.getIdentificacion()
@@ -99,7 +105,8 @@ public class CheckInRestController {
             response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(checkInDTO, HttpStatus.OK);
+        response.put("checkInDTO", checkInDTO);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 
@@ -217,7 +224,7 @@ public class CheckInRestController {
         Map<String, Object> response = new HashMap<>();
         checkIn = checkInService.getCheckInOf(id);
         if(checkIn == null){
-            response.put("error","El Check-in para ser eliminado no existe");
+            response.put("error","El Check-in a eliminar no existe");
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
         try{
