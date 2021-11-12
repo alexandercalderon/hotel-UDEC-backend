@@ -48,7 +48,7 @@ public class CheckIn implements Serializable {
             joinColumns = @JoinColumn(name = "id_checkin",nullable = false),
             inverseJoinColumns = @JoinColumn(name = "id_habitacion", nullable = false, unique = true)
             ,uniqueConstraints = {@UniqueConstraint(columnNames = {"id_checkin","id_habitacion"})})
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     public List<Habitaciones> habitacionCheckIn;
 
 }

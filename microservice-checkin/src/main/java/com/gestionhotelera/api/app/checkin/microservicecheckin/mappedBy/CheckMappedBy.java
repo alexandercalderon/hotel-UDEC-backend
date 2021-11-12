@@ -1,9 +1,6 @@
 package com.gestionhotelera.api.app.checkin.microservicecheckin.mappedBy;
 
-import com.gestionhotelera.api.app.checkin.microservicecheckin.dto.CheckInDTO;
-import com.gestionhotelera.api.app.checkin.microservicecheckin.dto.HabitacionDTO;
-import com.gestionhotelera.api.app.checkin.microservicecheckin.dto.NewCheckInDTO;
-import com.gestionhotelera.api.app.checkin.microservicecheckin.dto.UsuarioDTO;
+import com.gestionhotelera.api.app.checkin.microservicecheckin.dto.*;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.service.ICheckInService;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.service.IHabitacionService;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.service.IPersonaService;
@@ -11,11 +8,16 @@ import com.gestionhotelera.cammons.habitaciones.model.CheckIn;
 import com.gestionhotelera.cammons.habitaciones.model.Habitaciones;
 import com.gestionhotelera.cammons.habitaciones.model.Personas;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -82,17 +84,35 @@ public class CheckMappedBy {
         return checkInDTO;
     }
 
-    public void newCheckInDtoToCheckIn(NewCheckInDTO checkInDTO){
-        CheckIn checkIn = new CheckIn();
-        checkIn.setNumeroDias(checkInDTO.getNumeroDias());
-        checkIn.setFechaIngreso(checkInDTO.getFechaIngreso());
-        checkIn.setFechaSalida(checkInDTO.getFechaSalida());
-        checkIn.setPersona(personaService.getPersonaByIdentificacion(checkInDTO.getIdentificadorPersona()));
-        List<Habitaciones> habitaciones = checkInDTO.getHabitaciones().stream()
-                .map(h -> habitacionService.getHabitacionByNumeroHabitacion(h.getNumeroHabitacion()))
-                .collect(Collectors.toList());
-        checkIn.setHabitacionCheckIn(habitaciones);
-        checkInService.saveCheckIn(checkIn);
+
+    public ResponseEntity<?> getHabitacionByNumHabitacion(Long numHabitacion){
+        Map<String, Object> response = new HashMap<>();
+        HabitacionDTO habitacionDTO = new HabitacionDTO();
+        CheckIn checkIn = null;
+        Habitaciones habitacion = null;
+
+        try{
+            habitacion = habitacionService.getHabitacionByNumeroHabitacion(numHabitacion);
+            if(habitacion == null){
+                response.put("mensaje","La habitacon ["+numHabitacion+"] no existe");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+            //Como saber is una habitacion ya esta asociada aun check-in
+            checkIn = checkInService.checkByNumeroHabitacion(habitacion.getNumHabitacion());
+            if(checkIn != null){
+                response.put("mensaje","Esta habitacion ya tiene asociado un Check-in");
+                return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+            }
+            habitacionDTO.setNumeroHabitacion(habitacion.getNumHabitacion());
+            habitacionDTO.setTipo(habitacion.getTipoHabitacion().getNomTipoHabitacion());
+            habitacionDTO.setTarifa(habitacion.getTipoHabitacion().getPrecioHabitacion());
+        }catch (DataAccessException e){
+            response.put("mensaje", "Error al a buscar la habitacion");
+            response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        response.put("habitacionDTO",habitacionDTO);
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
 }

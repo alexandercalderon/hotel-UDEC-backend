@@ -53,5 +53,10 @@ public class CheckInServiceImpl implements ICheckInService {
         checkInRepository.deleteById(id);
     }
 
+    @Override
+    public CheckIn checkByNumeroHabitacion(Long numHabitacion) {
+        return checkInRepository.getCheckInByNumHabitacion(numHabitacion);
+    }
+
 
 }

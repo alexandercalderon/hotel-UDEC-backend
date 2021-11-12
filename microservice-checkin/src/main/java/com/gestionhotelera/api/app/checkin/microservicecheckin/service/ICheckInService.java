@@ -24,4 +24,6 @@ public interface ICheckInService {
 
     void deleteCheckInById(Long id);
 
+    CheckIn checkByNumeroHabitacion(Long numHabitacion);
+
 }

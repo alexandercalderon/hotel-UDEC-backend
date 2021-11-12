@@ -21,4 +21,7 @@ public interface CheckInRepository extends JpaRepository<CheckIn,Long> {
     @Query("select c from CheckIn  c left  join fetch  c.persona p left join fetch c.habitacionCheckIn h left  join fetch h.tipoHabitacion t where p.identificacion=?1")
     CheckIn getCheckByIdentifiacionOfPerson(Long identificacion);
 
+    @Query("select c from CheckIn c left join fetch  c.habitacionCheckIn h left join fetch h.tipoHabitacion t where h.numHabitacion =?1")
+    CheckIn getCheckInByNumHabitacion(Long numeroHabitacion);
+
 }

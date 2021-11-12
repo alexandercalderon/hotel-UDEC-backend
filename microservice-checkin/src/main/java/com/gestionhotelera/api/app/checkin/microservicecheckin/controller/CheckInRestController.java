@@ -3,8 +3,10 @@ package com.gestionhotelera.api.app.checkin.microservicecheckin.controller;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.dto.CheckInDTO;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.dto.NewCheckInDTO;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.dto.PersonaDTO;
+import com.gestionhotelera.api.app.checkin.microservicecheckin.dto.SinglePersonDTO;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.mappedBy.CheckMappedBy;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.mappedBy.CheckToList;
+import com.gestionhotelera.api.app.checkin.microservicecheckin.mappedBy.PersonaMappedBy;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.service.ICheckInService;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.service.IHabitacionService;
 import com.gestionhotelera.api.app.checkin.microservicecheckin.service.IPersonaService;
@@ -46,6 +48,9 @@ public class CheckInRestController {
 
     @Autowired
     private CheckMappedBy checkMappedBy;
+
+    @Autowired
+    private PersonaMappedBy personaMappedBy;
 
     @GetMapping("/all")
     public ResponseEntity<?> allCheckIn() {
@@ -236,6 +241,17 @@ public class CheckInRestController {
         }
         response.put("mensaje","Check-in Eliminado");
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+
+    @GetMapping(value = "/get/persona/{cedula}")
+    public ResponseEntity<?> getPersona(@PathVariable Long cedula){
+        return personaMappedBy.personToSinglePersonDto(cedula);
+    }
+
+    @GetMapping(value = "/get/habitacion/{numeroHabitacion}")
+    public ResponseEntity<?> getHabitacion(@PathVariable Long numeroHabitacion){
+        return checkMappedBy.getHabitacionByNumHabitacion(numeroHabitacion);
     }
 
 }
