@@ -100,5 +100,11 @@ public class CheckOutController {
             return  ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/findPerson/{cedula}")
+    public ResponseEntity<Personas> finsByCedula(@PathVariable Long cedula){
+        Personas personas = personService.findByCedula(cedula);
+        if(personas == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok().body(personas);
+    }
 
 }

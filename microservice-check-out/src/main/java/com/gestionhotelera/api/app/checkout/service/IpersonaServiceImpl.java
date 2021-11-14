@@ -21,4 +21,9 @@ public class IpersonaServiceImpl implements IpersonService {
     public Personas find(Integer id) {
         return repo.findById(id).orElse(null);
     }
+
+    @Override
+    public Personas findByCedula(Long cedula) {
+        return repo.findByIdentificacion(cedula).orElse(null);
+    }
 }
