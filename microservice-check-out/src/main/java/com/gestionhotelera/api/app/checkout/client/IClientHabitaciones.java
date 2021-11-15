@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "microservice-ocupacion", url = "localhost:8003")
 public interface IClientHabitaciones {
-    @GetMapping("/find/{id}")
+    @GetMapping("/habitacion/{id}")
     public Habitaciones find(@PathVariable Long id);
 
     @GetMapping("/habitacion/{numHabitacion}")

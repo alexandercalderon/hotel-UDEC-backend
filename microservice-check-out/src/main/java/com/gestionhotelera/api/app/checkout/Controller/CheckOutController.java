@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -61,19 +62,17 @@ public class CheckOutController {
         return ResponseEntity.status(HttpStatus.CREATED).body(ventaService.save(ventas));
     }
 
-    @PostMapping("/addPerson")
-    public ResponseEntity<Personas> addPerson(@RequestBody Personas persona){
-       return ResponseEntity.status(HttpStatus.CREATED).body(personService.save(persona));
-    }
 
-    @PutMapping("/add-habitaciones/{id}/{idHabitacion}")
-    public ResponseEntity<CheckOut> addHabitaciones(@PathVariable Long id, @PathVariable Long idHabitacion){
+    @PutMapping("/add-habitaciones/{id}")
+    public ResponseEntity<CheckOut> addHabitaciones(@PathVariable Long id,@RequestBody List<Long> idHabitaciones){
         CheckOut checkOut = service.find(id);
-        if(checkOut == null) return ResponseEntity.badRequest().build();
-        Habitaciones habitacion = client.find(idHabitacion);
-        if(habitacion == null) return ResponseEntity.notFound().build();
-        habitacion.addCheckouts(checkOut);
-        checkOut.addHabitacion(habitacion);
+        List<Habitaciones> habitaciones = idHabitaciones.stream().map(idHabitacion ->{
+            return client.find(idHabitacion);
+        }).collect(Collectors.toList());
+        for (Habitaciones habitacion: habitaciones){
+            habitacion.addCheckouts(checkOut);
+            checkOut.addHabitacion(habitacion);
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(checkOut));
     }
 
