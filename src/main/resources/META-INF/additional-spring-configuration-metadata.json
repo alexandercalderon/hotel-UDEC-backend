@@ -1,0 +1,47 @@
+{"properties": [
+  {
+    "name": "hotel-udec-backend.app.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'hotel-udec-backend.app.jwtSecret'"
+  },
+  {
+    "name": "hotel-udec-backend.app.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'hotel-udec-backend.app.jwtSecret'"
+  },
+  {
+    "name": "hotel-udec-backend.app.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'hotel-udec-backend.app.jwtSecret'"
+  },
+  {
+    "name": "hotel-udec-backend.app.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'hotel-udec-backend.app.jwtSecret'"
+  },
+  {
+    "name": "hotel-udec-backend.app.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'hotel-udec-backend.app.jwtSecret'"
+  },
+  {
+    "name": "hotel-udec-backend.app.jwtExpirationMs",
+    "type": "java.lang.String",
+    "description": "A description for 'hotel-udec-backend.app.jwtExpirationMs'"
+  },
+  {
+    "name": "hotel-udec-backend.app.jwtExpirationMs",
+    "type": "java.lang.String",
+    "description": "A description for 'hotel-udec-backend.app.jwtExpirationMs'"
+  },
+  {
+    "name": "hotel-udec-backend.app.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'hotel-udec-backend.app.jwtSecret'"
+  },
+  {
+    "name": "hotel-udec-backend.app.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'hotel-udec-backend.app.jwtSecret'"
+  }
+]}
