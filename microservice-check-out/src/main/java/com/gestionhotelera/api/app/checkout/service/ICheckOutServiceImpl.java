@@ -28,12 +28,20 @@ public class ICheckOutServiceImpl implements ICheckOutService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public CheckOut find(Long id) {
         return  checkOutRepo.findById(id).orElse(null);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public CheckOut findByIdentificacion(Long dentificacion) {
         return checkOutRepo.findbyIdentifiacion(dentificacion);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        checkOutRepo.deleteById(id);
     }
 }

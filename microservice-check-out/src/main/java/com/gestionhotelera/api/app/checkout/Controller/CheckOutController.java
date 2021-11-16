@@ -106,4 +106,10 @@ public class CheckOutController {
         return ResponseEntity.ok().body(personas);
     }
 
+     @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+     }
+
 }

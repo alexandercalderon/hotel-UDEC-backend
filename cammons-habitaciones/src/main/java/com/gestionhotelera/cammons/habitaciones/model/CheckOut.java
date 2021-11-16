@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class CheckOut {
             joinColumns = @JoinColumn(name = "fk_check_out",nullable = false ),
             inverseJoinColumns = @JoinColumn(name = "fk_habitaciones", nullable = false)
     )
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     public List<Habitaciones> habitacion;
 
     @Temporal(TemporalType.DATE)
@@ -48,9 +49,9 @@ public class CheckOut {
     public List<Adeudo> adeudos;
 
 
-    @OneToOne()
-    @JsonIgnoreProperties(value = {"checkOut"}, allowSetters = true)
-    @JoinColumn(name = "fk_persona", updatable = false, nullable = false)
+    @JsonIgnoreProperties(value = {"checkOuts"})
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_persona")
     private Personas persona;
 
     @OneToOne()
@@ -133,4 +134,5 @@ public class CheckOut {
     public Personas getPersona() {
         return persona;
     }
+
 }

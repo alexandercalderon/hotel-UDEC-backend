@@ -30,11 +30,11 @@ public class Habitaciones {
     private List<ImagenesHabitacion> imagenes;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "habitacion")
+    @ManyToMany(mappedBy = "habitacion", cascade = CascadeType.ALL)
     private List<CheckOut> checkouts;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "habitacionCheckIn")
+    @ManyToMany(mappedBy = "habitacionCheckIn", cascade = CascadeType.ALL)
     private List<CheckIn> checkIns;
 
 
@@ -112,4 +112,5 @@ public class Habitaciones {
     public void setCheckIns(List<CheckIn> checkIns) {
         this.checkIns = checkIns;
     }
+
 }

@@ -9,4 +9,5 @@ public interface ICheckOutService {
     public CheckOut save(CheckOut checkOut);
     public CheckOut find(Long id);
     public CheckOut findByIdentificacion(Long dentificacion);
+    public void delete(Long id);
 }
