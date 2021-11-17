@@ -112,4 +112,11 @@ public class CheckOutController {
         return ResponseEntity.noContent().build();
      }
 
+     @GetMapping("/find-check/{id}")
+    public ResponseEntity<?> findCheck(@PathVariable Long id){
+        CheckOut checkOut = service.find(id);
+        if(checkOut == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok().body(checkOut);
+     }
+
 }
