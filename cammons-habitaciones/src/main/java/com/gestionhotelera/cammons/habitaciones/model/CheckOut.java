@@ -45,7 +45,7 @@ public class CheckOut {
     private Integer numeroDias;
 
     @JsonIgnoreProperties(value = {"checkOut"},allowSetters = true)
-    @OneToMany(mappedBy = "checkout", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "checkout", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public List<Adeudo> adeudos;
 
 

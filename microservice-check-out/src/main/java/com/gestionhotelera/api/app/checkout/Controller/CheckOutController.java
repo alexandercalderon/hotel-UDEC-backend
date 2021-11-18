@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -117,6 +118,20 @@ public class CheckOutController {
         CheckOut checkOut = service.find(id);
         if(checkOut == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok().body(checkOut);
+     }
+
+     @PutMapping("/update/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody CheckOut checkOut){
+       CheckOut checkUpdate = service.find(id);
+       if(checkUpdate == null) return ResponseEntity.notFound().build();
+       checkUpdate.setPersona(checkOut.getPersona());
+       checkUpdate.setVentas(checkOut.getVentas());
+       checkUpdate.setNumeroDias(checkOut.getNumeroDias());
+       checkUpdate.setFechaEgreso(checkOut.getFechaEgreso());
+       checkUpdate.setFechaIngreso(checkOut.getFechaIngreso());
+       checkUpdate.setHabitacion(checkOut.getHabitacion());
+       checkUpdate.setAdeudos(checkOut.getAdeudos());
+       return ResponseEntity.status(HttpStatus.CREATED).body(service.save(checkUpdate));
      }
 
 }
