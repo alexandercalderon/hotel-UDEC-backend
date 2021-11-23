@@ -64,4 +64,13 @@ public class Adeudo {
     public Long getImporte() {
         return importe;
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Adeudo)) return false;
+        Adeudo  adeudo= (Adeudo) obj;
+        return this.id != null && this.id.equals(adeudo.getId());
+    }
 }

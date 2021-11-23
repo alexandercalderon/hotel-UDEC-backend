@@ -124,13 +124,19 @@ public class CheckOutController {
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody CheckOut checkOut){
        CheckOut checkUpdate = service.find(id);
        if(checkUpdate == null) return ResponseEntity.notFound().build();
-       checkUpdate.setPersona(checkOut.getPersona());
-       checkUpdate.setVentas(checkOut.getVentas());
+       Ventas ventas = ventaService.find(checkUpdate.getVentas().getIdVenta());
+       ventas.setFecVenta(checkOut.getVentas().getFecVenta());
+       ventas.setTotalVente(checkOut.getVentas().getTotalVente());
+       addPago(ventas.getIdVenta(), checkOut.getVentas().getPago());
+
+
        checkUpdate.setNumeroDias(checkOut.getNumeroDias());
        checkUpdate.setFechaEgreso(checkOut.getFechaEgreso());
        checkUpdate.setFechaIngreso(checkOut.getFechaIngreso());
-       checkUpdate.setHabitacion(checkOut.getHabitacion());
-       checkUpdate.setAdeudos(checkOut.getAdeudos());
+
+
+       save(checkUpdate,ventas.getIdVenta(),checkOut.getPersona().getIdPersona());
+
        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(checkUpdate));
      }
 

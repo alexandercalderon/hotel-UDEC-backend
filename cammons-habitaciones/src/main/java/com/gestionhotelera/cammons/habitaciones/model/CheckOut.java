@@ -84,6 +84,10 @@ public class CheckOut {
         this.habitacion.add(habitaciones);
     }
 
+    public void  removeHabitacion(Habitaciones habitaciones){
+        this.habitacion.remove(habitaciones);
+    }
+
     public void setFechaIngreso(Date fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
@@ -102,6 +106,10 @@ public class CheckOut {
 
     public void addAdeudos(Adeudo adeudos) {
         this.adeudos.add(adeudos);
+    }
+
+    public void removeAdeudo(Adeudo adeudo){
+        this.getAdeudos().remove(adeudo);
     }
     public void setPersona(Personas persona) {
         this.persona = persona;

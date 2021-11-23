@@ -113,4 +113,11 @@ public class Habitaciones {
         this.checkIns = checkIns;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Habitaciones)) return false;
+        Habitaciones habitaciones = (Habitaciones) obj;
+            return this.idHabitacion != null && this.idHabitacion.equals(habitaciones.getIdHabitacion());
+    }
 }
